@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.0-preview.232" />
+    <PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.0-preview.232" />
+    <PackageReference Include="SkiaSharp.Views.Maui.Core" Version="2.88.0-preview.232" />
+  </ItemGroup>
+
+</Project>

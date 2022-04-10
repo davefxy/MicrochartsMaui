@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31611.283
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicrochartsSample", "MicrochartsSample.csproj", "{DDCD1DB2-F20C-4528-9D6D-567ED1015072}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microcharts", "..\Microcharts\Microcharts.csproj", "{8E463D63-3EA5-48B7-9A0F-DF2D611B0260}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microcharts.View", "..\Microcharts.View\Microcharts.View.csproj", "{008372C0-65DE-474D-B237-E318F82031D1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DDCD1DB2-F20C-4528-9D6D-567ED1015072}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDCD1DB2-F20C-4528-9D6D-567ED1015072}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDCD1DB2-F20C-4528-9D6D-567ED1015072}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{DDCD1DB2-F20C-4528-9D6D-567ED1015072}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDCD1DB2-F20C-4528-9D6D-567ED1015072}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDCD1DB2-F20C-4528-9D6D-567ED1015072}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8E463D63-3EA5-48B7-9A0F-DF2D611B0260}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E463D63-3EA5-48B7-9A0F-DF2D611B0260}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E463D63-3EA5-48B7-9A0F-DF2D611B0260}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E463D63-3EA5-48B7-9A0F-DF2D611B0260}.Release|Any CPU.Build.0 = Release|Any CPU
+		{008372C0-65DE-474D-B237-E318F82031D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{008372C0-65DE-474D-B237-E318F82031D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{008372C0-65DE-474D-B237-E318F82031D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{008372C0-65DE-474D-B237-E318F82031D1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61F7FB11-1E47-470C-91E2-47F8143E1572}
+	EndGlobalSection
+EndGlobal
