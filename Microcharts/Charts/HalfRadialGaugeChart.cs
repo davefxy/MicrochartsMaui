@@ -47,41 +47,33 @@ namespace Microcharts
 
         public void DrawGaugeArea(SKCanvas canvas, ChartEntry entry, float radius, int cx, int cy, float strokeWidth)
         {
-            using (var paint = new SKPaint
+            using var paint = new SKPaint
             {
                 Style = SKPaintStyle.Stroke,
                 StrokeWidth = strokeWidth,
                 StrokeCap = SKStrokeCap.Round,
                 Color = entry.Color.WithAlpha(LineAreaAlpha),
                 IsAntialias = true,
-            })
-            {
-                using (SKPath path = new SKPath())
-                {
-                    path.AddArc(SKRect.Create(cx - radius * 2, cy - radius * 2, 4 * radius, 4 * radius), 180, 180);
-                    canvas.DrawPath(path, paint);
-                }
-            }
+            };
+            using SKPath path = new();
+            path.AddArc(SKRect.Create(cx - radius * 2, cy - radius * 2, 4 * radius, 4 * radius), 180, 180);
+            canvas.DrawPath(path, paint);
         }
 
         public void DrawGauge(SKCanvas canvas, SKColor color, float value, float radius, int cx, int cy, float strokeWidth)
         {
-            using (var paint = new SKPaint
+            using var paint = new SKPaint
             {
                 Style = SKPaintStyle.Stroke,
                 StrokeWidth = strokeWidth,
                 StrokeCap = SKStrokeCap.Round,
                 Color = color,
                 IsAntialias = true,
-            })
-            {
-                using (SKPath path = new SKPath())
-                {
-                    var sweepAngle =  AnimationProgress * 180 * (Math.Abs(value) - AbsoluteMinimum) / ValueRange;
-                    path.AddArc(SKRect.Create(cx - radius * 2, cy - radius * 2, 4 * radius, 4 * radius), 180, sweepAngle);
-                    canvas.DrawPath(path, paint);
-                }
-            }
+            };
+            using SKPath path = new();
+            var sweepAngle = AnimationProgress * 180 * (Math.Abs(value) - AbsoluteMinimum) / ValueRange;
+            path.AddArc(SKRect.Create(cx - radius * 2, cy - radius * 2, 4 * radius, 4 * radius), 180, sweepAngle);
+            canvas.DrawPath(path, paint);
         }
 
         public override void DrawContent(SKCanvas canvas, int width, int height)
@@ -118,7 +110,7 @@ namespace Microcharts
         private void DrawCaption(SKCanvas canvas, int width, int height)
         {
             var rightValues = Entries.Take(Entries.Count() / 2).ToList();
-            var leftValues = Entries.Skip(rightValues.Count()).ToList();
+            var leftValues = Entries.Skip(rightValues.Count).ToList();
 
             leftValues.Reverse();
 

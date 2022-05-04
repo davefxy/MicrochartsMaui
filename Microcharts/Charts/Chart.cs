@@ -1,14 +1,9 @@
 // Copyright (c) Aloïs DENIEL. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Threading.Tasks;
 using SkiaSharp;
 
 namespace Microcharts
@@ -39,7 +34,7 @@ namespace Microcharts
 
         private TimeSpan animationDuration = TimeSpan.FromSeconds(1.5f);
 
-        private Task invalidationPlanification;
+        private Task? invalidationPlanification;
 
         private CancellationTokenSource animationCancellation;
 
@@ -384,15 +379,13 @@ namespace Microcharts
 
                     if (DrawDebugRectangles)
                     {
-                        using (var paint = new SKPaint
+                        using var paint = new SKPaint
                         {
                             Style = SKPaintStyle.Fill,
                             Color = entry.Color,
                             IsStroke = true
-                        })
-                        {
-                            canvas.DrawRect(labelBounds, paint);
-                        }
+                        };
+                        canvas.DrawRect(labelBounds, paint);
                     }
 
                     if (isLeft)
@@ -490,7 +483,7 @@ namespace Microcharts
         /// <returns>The async.</returns>
         /// <param name="entrance">If set to <c>true</c> entrance.</param>
         /// <param name="token">Token.</param>
-        public async Task AnimateAsync(bool entrance, CancellationToken token = default(CancellationToken))
+        public async Task AnimateAsync(bool entrance, CancellationToken token = default)
         {
             var watch = new Stopwatch();
 

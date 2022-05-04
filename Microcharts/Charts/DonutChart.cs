@@ -1,9 +1,6 @@
 // Copyright (c) Aloïs DENIEL. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using SkiaSharp;
 
 namespace Microcharts
@@ -46,14 +43,12 @@ namespace Microcharts
                 {
                     if (DrawDebugRectangles)
                     {
-                        using (var paint = new SKPaint
+                        using var paint = new SKPaint
                         {
                             Color = SKColors.Red,
                             IsStroke = true,
-                        })
-                        {
-                            canvas.DrawRect(DrawableChartArea, paint);
-                        }
+                        };
+                        canvas.DrawRect(DrawableChartArea, paint);
                     }
 
                     canvas.Translate(DrawableChartArea.Left + DrawableChartArea.Width / 2, height / 2);

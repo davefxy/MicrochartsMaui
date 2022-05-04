@@ -1,0 +1,10 @@
+global using CommunityToolkit.Mvvm.ComponentModel;
+global using CommunityToolkit.Mvvm.Input;
+global using Microcharts;
+global using MicrochartsSample.Models;
+global using MicrochartsSample.Pages;
+global using MicrochartsSample.ViewModels;
+global using System.Collections.ObjectModel;
+global using System.ComponentModel;
+global using System.Diagnostics;
+global using System.Runtime.CompilerServices;

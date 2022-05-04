@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using SkiaSharp;
 
 namespace Microcharts
@@ -25,7 +22,7 @@ namespace Microcharts
 
         #region Properties
 
-        private Dictionary<ChartSerie, List<SKPoint>> pointsPerSerie = new Dictionary<ChartSerie, List<SKPoint>>();
+        private Dictionary<ChartSerie, List<SKPoint>> pointsPerSerie = new();
 
         /// <summary>
         /// Gets or sets the size of the line.

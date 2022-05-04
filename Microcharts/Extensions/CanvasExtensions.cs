@@ -22,7 +22,7 @@ namespace Microcharts
 
                 if (hasLabel)
                 {
-                    using (var paint = new SKPaint
+                    using var paint = new SKPaint
                     {
                         TextSize = textSize,
                         IsAntialias = true,
@@ -30,24 +30,22 @@ namespace Microcharts
                         IsStroke = false,
                         TextAlign = horizontalAlignment,
                         Typeface = typeface
-                    })
-                    {
-                        var bounds = new SKRect();
-                        var text = label;
-                        paint.MeasureText(text, ref bounds);
+                    };
+                    var bounds = new SKRect();
+                    var text = label;
+                    paint.MeasureText(text, ref bounds);
 
-                        var y = point.Y - ((bounds.Top + bounds.Bottom) / 2) - space;
+                    var y = point.Y - ((bounds.Top + bounds.Bottom) / 2) - space;
 
-                        canvas.DrawText(text, point.X, y, paint);
+                    canvas.DrawText(text, point.X, y, paint);
 
-                        var labelBounds = GetAbsolutePositionRect(point.X, y, bounds, horizontalAlignment);
-                        totalBounds = labelBounds.Standardized;
-                    }
+                    var labelBounds = GetAbsolutePositionRect(point.X, y, bounds, horizontalAlignment);
+                    totalBounds = labelBounds.Standardized;
                 }
 
                 if (hasValueLabel)
                 {
-                    using (var paint = new SKPaint()
+                    using var paint = new SKPaint()
                     {
                         TextSize = textSize,
                         IsAntialias = true,
@@ -56,26 +54,24 @@ namespace Microcharts
                         IsStroke = false,
                         TextAlign = horizontalAlignment,
                         Typeface = typeface
-                    })
+                    };
+                    var bounds = new SKRect();
+                    var text = value;
+                    paint.MeasureText(text, ref bounds);
+
+                    var y = point.Y - ((bounds.Top + bounds.Bottom) / 2) + space;
+
+                    canvas.DrawText(text, point.X, y, paint);
+
+                    var valueBounds = GetAbsolutePositionRect(point.X, y, bounds, horizontalAlignment);
+
+                    if (totalBounds.IsEmpty)
                     {
-                        var bounds = new SKRect();
-                        var text = value;
-                        paint.MeasureText(text, ref bounds);
-
-                        var y = point.Y - ((bounds.Top + bounds.Bottom) / 2) + space;
-
-                        canvas.DrawText(text, point.X, y, paint);
-
-                        var valueBounds = GetAbsolutePositionRect(point.X, y, bounds, horizontalAlignment);
-
-                        if (totalBounds.IsEmpty)
-                        {
-                            totalBounds = valueBounds.Standardized;
-                        }
-                        else
-                        {
-                            totalBounds.Union(valueBounds.Standardized);
-                        }
+                        totalBounds = valueBounds.Standardized;
+                    }
+                    else
+                    {
+                        totalBounds.Union(valueBounds.Standardized);
                     }
                 }
             }
@@ -91,24 +87,22 @@ namespace Microcharts
         /// <param name="mode">The point mode.</param>
         public static void DrawPoint(this SKCanvas canvas, SKPoint point, SKColor color, float size, PointMode mode)
         {
-            using (var paint = new SKPaint
+            using var paint = new SKPaint
             {
                 Style = SKPaintStyle.Fill,
                 IsAntialias = true,
                 Color = color,
-            })
+            };
+            switch (mode)
             {
-                switch (mode)
-                {
-                    case PointMode.Square:
-                        canvas.DrawRect(SKRect.Create(point.X - (size / 2), point.Y - (size / 2), size, size), paint);
-                        break;
+                case PointMode.Square:
+                    canvas.DrawRect(SKRect.Create(point.X - (size / 2), point.Y - (size / 2), size, size), paint);
+                    break;
 
-                    case PointMode.Circle:
-                        paint.IsAntialias = true;
-                        canvas.DrawCircle(point.X, point.Y, size / 2, paint);
-                        break;
-                }
+                case PointMode.Circle:
+                    paint.IsAntialias = true;
+                    canvas.DrawCircle(point.X, point.Y, size / 2, paint);
+                    break;
             }
         }
 
@@ -125,16 +119,14 @@ namespace Microcharts
         {
             using (var shader = SKShader.CreateLinearGradient(startPoint, endPoint, new[] { startColor, endColor }, null, SKShaderTileMode.Clamp))
             {
-                using (var paint = new SKPaint
+                using var paint = new SKPaint
                 {
                     Style = SKPaintStyle.Stroke,
                     StrokeWidth = size,
                     Shader = shader,
                     IsAntialias = true,
-                })
-                {
-                    canvas.DrawLine(startPoint.X, startPoint.Y, endPoint.X, endPoint.Y, paint);
-                }
+                };
+                canvas.DrawLine(startPoint.X, startPoint.Y, endPoint.X, endPoint.Y, paint);
             }
         }
 

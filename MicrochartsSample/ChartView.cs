@@ -1,9 +1,10 @@
 ﻿using Microcharts;
+using Microsoft.Maui.Controls;
 using SkiaSharp;
 using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;
 
-namespace Microcharts.View
+namespace MicrochartsSample
 {
     // All the code in this file is included in all platforms.
     public class ChartView : SKCanvasView

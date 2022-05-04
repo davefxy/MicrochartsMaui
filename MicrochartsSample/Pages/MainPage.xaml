@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MicrochartsSample.MainPage"
+             x:Class="MicrochartsSample.Pages.MainPage"
              xmlns:local="clr-namespace:MicrochartsSample"
-             xmlns:microcharts="clr-namespace:Microcharts.View;assembly=Microcharts.View"
+             xmlns:microcharts="clr-namespace:Microcharts;assembly=Microcharts"
              x:Name="Page"
              BackgroundColor="{DynamicResource SecondaryColor}">
 
@@ -50,12 +50,12 @@
                                            Text="SERIES"
                                            TextColor="White" />
                                 </Frame>
-                                <microcharts:ChartView x:Name="chartView"
+                                <!--<microcharts:ChartView x:Name="chartView"
                                                        Grid.Row="1"
                                                        Grid.ColumnSpan="2"
                                                        BackgroundColor="White"
                                                        Chart="{Binding Chart}"
-                                                       HeightRequest="250" />
+                                                       HeightRequest="250" />-->
                             </Grid>
                         </Frame>
                     </Grid>

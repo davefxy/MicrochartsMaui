@@ -13,7 +13,7 @@ namespace Microcharts
         /// <summary>
         /// internal series
         /// </summary>
-        protected IEnumerable<ChartSerie> series;
+        protected IEnumerable<ChartSerie>? series;
 
         /// <summary>
         /// Gets or sets the Series

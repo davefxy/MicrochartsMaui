@@ -1,4 +1,5 @@
 ﻿using SkiaSharp.Views.Maui.Controls.Hosting;
+
 namespace MicrochartsSample;
 
 public static class MauiProgram
@@ -13,8 +14,10 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 			});
-		builder.Services.AddTransient<ChartConfigurationPage>();
+		builder.Services.AddSingleton<ChartConfigurationPage>();
+
 		builder.Services.AddTransient<ChartPage>();
+		builder.Services.AddTransient<ChartViewModel>();
 
 		return builder.Build();
 	}

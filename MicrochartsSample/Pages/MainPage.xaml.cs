@@ -1,5 +1,4 @@
-﻿using MicrochartsSample.Models;
-namespace MicrochartsSample;
+﻿namespace MicrochartsSample.Pages;
 
 public partial class MainPage : ContentPage
 {

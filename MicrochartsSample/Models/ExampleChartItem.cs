@@ -1,5 +1,3 @@
-using Microcharts;
-
 namespace MicrochartsSample.Models;
 
 public class ExampleChartItem

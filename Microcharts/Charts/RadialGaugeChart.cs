@@ -47,36 +47,30 @@ namespace Microcharts
 
         public void DrawGaugeArea(SKCanvas canvas, ChartEntry entry, float radius, int cx, int cy, float strokeWidth)
         {
-            using (var paint = new SKPaint
+            using var paint = new SKPaint
             {
                 Style = SKPaintStyle.Stroke,
                 StrokeWidth = strokeWidth,
                 Color = entry.Color.WithAlpha(LineAreaAlpha),
                 IsAntialias = true,
-            })
-            {
-                canvas.DrawCircle(cx, cy, radius, paint);
-            }
+            };
+            canvas.DrawCircle(cx, cy, radius, paint);
         }
 
         public void DrawGauge(SKCanvas canvas, SKColor color, float value, float radius, int cx, int cy, float strokeWidth)
         {
-            using (var paint = new SKPaint
+            using var paint = new SKPaint
             {
                 Style = SKPaintStyle.Stroke,
                 StrokeWidth = strokeWidth,
                 StrokeCap = SKStrokeCap.Round,
                 Color = color,
                 IsAntialias = true,
-            })
-            {
-                using (SKPath path = new SKPath())
-                {
-                    var sweepAngle = AnimationProgress * 360 * (Math.Abs(value) - AbsoluteMinimum) / ValueRange;
-                    path.AddArc(SKRect.Create(cx - radius, cy - radius, 2 * radius, 2 * radius), StartAngle, sweepAngle);
-                    canvas.DrawPath(path, paint);
-                }
-            }
+            };
+            using SKPath path = new();
+            var sweepAngle = AnimationProgress * 360 * (Math.Abs(value) - AbsoluteMinimum) / ValueRange;
+            path.AddArc(SKRect.Create(cx - radius, cy - radius, 2 * radius, 2 * radius), StartAngle, sweepAngle);
+            canvas.DrawPath(path, paint);
         }
 
         public override void DrawContent(SKCanvas canvas, int width, int height)
@@ -110,7 +104,7 @@ namespace Microcharts
         private void DrawCaption(SKCanvas canvas, int width, int height)
         {
             var rightValues = Entries.Take(Entries.Count() / 2).ToList();
-            var leftValues = Entries.Skip(rightValues.Count()).ToList();
+            var leftValues = Entries.Skip(rightValues.Count).ToList();
 
             leftValues.Reverse();
 

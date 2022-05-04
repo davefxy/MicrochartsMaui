@@ -1,4 +1,3 @@
-using Microcharts;
 using SkiaSharp;
 
 namespace MicrochartsSample.Models;
@@ -248,25 +247,17 @@ public static class Data
 
     public static IEnumerable<ExampleChartItem> CreateXamarinExampleChartItem(string chartType)
     {
-        switch (chartType)
+        return chartType switch
         {
-            case nameof(DonutChart):
-                return GenerateDonutChartExample();
-            case nameof(RadialGaugeChart):
-                return GenerateRadialGaugeChartExample();
-            case nameof(HalfRadialGaugeChart):
-                return GenerateHalfRadialGaugeChartExample();
-            case nameof(RadarChart):
-                return GenerateRadarChartExample();
-            case nameof(BarChart):
-                return GenerateGroupedBarChartExample();
-            case nameof(PointChart):
-                return GeneratePointSeriesChartExample();
-            case nameof(LineChart):
-                return GenerateLineSeriesChartExample();
-            default:
-                return null;
-        }
+            nameof(DonutChart) => GenerateDonutChartExample(),
+            nameof(RadialGaugeChart) => GenerateRadialGaugeChartExample(),
+            nameof(HalfRadialGaugeChart) => GenerateHalfRadialGaugeChartExample(),
+            nameof(RadarChart) => GenerateRadarChartExample(),
+            nameof(BarChart) => GenerateGroupedBarChartExample(),
+            nameof(PointChart) => GeneratePointSeriesChartExample(),
+            nameof(LineChart) => GenerateLineSeriesChartExample(),
+            _ => null,
+        };
     }
 
     private static IEnumerable<ExampleChartItem> GenerateDonutChartExample()
@@ -364,7 +355,7 @@ public static class Data
 
     private static IEnumerable<ExampleChartItem> GenerateGroupedBarChartExample()
     {
-        Random r = new Random((int)DateTime.Now.Ticks);
+        Random r = new((int)DateTime.Now.Ticks);
         yield return new ExampleChartItem()
         {
             ExampleName = "Default",
@@ -764,7 +755,7 @@ public static class Data
 
     private static IEnumerable<ExampleChartItem> GeneratePointSeriesChartExample()
     {
-        Random r = new Random((int)DateTime.Now.Ticks);
+        Random r = new((int)DateTime.Now.Ticks);
         yield return new ExampleChartItem()
         {
             ExampleName = "Default",
@@ -1035,7 +1026,7 @@ public static class Data
 
     private static IEnumerable<ExampleChartItem> GenerateLineSeriesChartExample()
     {
-        Random r = new Random((int)DateTime.Now.Ticks);
+        Random r = new((int)DateTime.Now.Ticks);
         yield return new ExampleChartItem()
         {
             ExampleName = "Default",
@@ -1296,14 +1287,12 @@ public static class Data
                 }
             }
         };
-
-
         yield break;
     }
 
     public static IEnumerable<ChartEntry> GenerateTimeSeriesEntry( Random r, int idx, int seconds, bool withNulls = true)
     {
-        List<ChartEntry> entries = new List<ChartEntry>();
+        List<ChartEntry> entries = new();
 
 
         DateTime end = DateTime.Now;
@@ -1336,7 +1325,7 @@ public static class Data
 
     private static IEnumerable<ChartEntry> GenerateSeriesEntry(Random r, int labelNumber = 3, bool withLabel = true, bool withNulls = false)
     {
-        List<ChartEntry> entries = new List<ChartEntry>();
+        List<ChartEntry> entries = new();
 
         int label = 2020 - ((labelNumber - 1) * 5);
         int? value = r.Next(0, 700);
@@ -1428,7 +1417,7 @@ public static class Data
         }
         else
         {
-            data = new (string label, int value)[0];
+            data = Array.Empty<(string label, int value)>();
         }
 
         data = data.Take(values).ToArray();

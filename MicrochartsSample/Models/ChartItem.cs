@@ -1,6 +1,3 @@
-using Microcharts;
-using System;
-
 namespace MicrochartsSample.Models;
 
 public class ChartItem

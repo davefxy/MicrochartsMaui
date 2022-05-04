@@ -1,9 +1,6 @@
 // Copyright (c) Aloïs DENIEL. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using SkiaSharp;
 
 namespace Microcharts
@@ -54,7 +51,7 @@ namespace Microcharts
         }
 
         /// <inheritdoc/>
-        protected override void DrawValueLabel(SKCanvas canvas, Dictionary<ChartEntry, SKRect> valueLabelSizes, float headerWithLegendHeight, SKSize itemSize, SKSize barSize, ChartEntry entry, float barX, float barY, float itemX, float origin)
+        protected override void DrawValueLabel(SKCanvas canvas, Dictionary<ChartEntry, SKRect> valueLabelSizes, float headerWithLegendHeight, SKSize itemSize, SKSize barSize, ChartEntry? entry, float barX, float barY, float itemX, float origin)
         {
             if (string.IsNullOrEmpty(entry?.ValueLabel))
                 return;
@@ -71,16 +68,14 @@ namespace Microcharts
         /// <inheritdoc />
         protected override void DrawBar(ChartSerie serie, SKCanvas canvas, float headerHeight, float itemX, SKSize itemSize, SKSize barSize, float origin, float barX, float barY, SKColor color)
         {
-            using (var paint = new SKPaint
+            using var paint = new SKPaint
             {
                 Style = SKPaintStyle.Fill,
                 Color = color,
-            })
-            {
-                (SKPoint location, SKSize size) = GetBarDrawingProperties(headerHeight, itemSize, barSize, origin, barX, barY);
-                var rect = SKRect.Create(location, size);
-                canvas.DrawRect(rect, paint);
-            }
+            };
+            (SKPoint location, SKSize size) = GetBarDrawingProperties(headerHeight, itemSize, barSize, origin, barX, barY);
+            var rect = SKRect.Create(location, size);
+            canvas.DrawRect(rect, paint);
         }
 
         private (SKPoint location, SKSize size) GetBarDrawingProperties(float headerHeight, SKSize itemSize, SKSize barSize, float origin, float barX, float barY)
@@ -105,20 +100,17 @@ namespace Microcharts
         {
             if (BarAreaAlpha > 0)
             {
-                using (var paint = new SKPaint
+                using var paint = new SKPaint
                 {
                     Style = SKPaintStyle.Fill,
                     Color = color.WithAlpha((byte)(this.BarAreaAlpha * this.AnimationProgress)),
-                })
-                {
-                    var max = value > 0 ? headerHeight : headerHeight + itemSize.Height;
-                    var height = Math.Abs(max - barY);
-                    var y = Math.Min(max, barY);
-                    canvas.DrawRect(SKRect.Create(barX - (itemSize.Width / 2), y, barSize.Width, height), paint);
-                }
+                };
+                var max = value > 0 ? headerHeight : headerHeight + itemSize.Height;
+                var height = Math.Abs(max - barY);
+                var y = Math.Min(max, barY);
+                canvas.DrawRect(SKRect.Create(barX - (itemSize.Width / 2), y, barSize.Width, height), paint);
             }
         }
-
         #endregion
     }
 }
