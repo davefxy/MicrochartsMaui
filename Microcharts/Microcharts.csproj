@@ -11,9 +11,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.0-preview.256" />
-    <PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.0-preview.256" />
-    <PackageReference Include="SkiaSharp.Views.Maui.Core" Version="2.88.0-preview.256" />
+    <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.1-preview.79" />
+    <PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.1-preview.79" />
+    <PackageReference Include="SkiaSharp.Views.Maui.Core" Version="2.88.1-preview.79" />
   </ItemGroup>
 
 </Project>

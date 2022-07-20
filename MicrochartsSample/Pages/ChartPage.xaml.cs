@@ -90,22 +90,22 @@ public partial class ChartPage : ContentPage
     //    }
     //}
 
-    //protected override void OnAppearing()
-    //{
-    //    base.OnAppearing();
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
 
-    //    chartView.Chart = vm.ExampleChartItem.Chart;
-    //    chartView.ChartPainted += (sender, args) =>
-    //    {
-    //        IsDrawing = false;
-    //    };
+        chartView.Chart = vm.ExampleChartItem.Chart;
+        //chartView.ChartPainted += (sender, args) =>
+        //{
+        //    vm.IsDrawing = false;
+        //};
 
-    //    if (!chartView.Chart.IsAnimating)
-    //        chartView.Chart.AnimateAsync(true).ConfigureAwait(false);
+        if (!chartView.Chart.IsAnimating)
+            chartView.Chart.AnimateAsync(true).ConfigureAwait(false);
 
-    //    if (vm.ExampleChartItem.IsDynamic && (chartView.Chart as LineChart) != null)
-    //    {
-    //        GenerateDynamicData();
-    //    }
-    //}
+        //if (vm.ExampleChartItem.IsDynamic && (chartView.Chart as LineChart) != null)
+        //{
+        //    vm.GenerateDynamicData();
+        //}
+    }
 }

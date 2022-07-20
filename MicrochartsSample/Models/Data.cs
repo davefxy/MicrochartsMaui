@@ -1210,18 +1210,18 @@ public static class Data
                         Color = SKColor.Parse("#2c3e50"),
                         Entries = GenerateSeriesEntry(r, 5),
                     },
-                    new ChartSerie()
-                    {
-                        Name = "Android",
-                        Color = SKColor.Parse("#77d065"),
-                        Entries = GenerateSeriesEntry(r, 5),
-                    },
-                    new ChartSerie()
-                    {
-                        Name = "iOS",
-                        Color = SKColor.Parse("#b455b6"),
-                        Entries = GenerateSeriesEntry(r, 5),
-                    },
+                    //new ChartSerie()
+                    //{
+                    //    Name = "Android",
+                    //    Color = SKColor.Parse("#77d065"),
+                    //    Entries = GenerateSeriesEntry(r, 5),
+                    //},
+                    //new ChartSerie()
+                    //{
+                    //    Name = "iOS",
+                    //    Color = SKColor.Parse("#b455b6"),
+                    //    Entries = GenerateSeriesEntry(r, 5),
+                    //},
                 }
             },
         };

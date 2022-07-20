@@ -3,8 +3,8 @@
 [QueryProperty(nameof(Models.ExampleChartItem), "ExampleChartItem")]
 public partial class ChartViewModel : BaseViewModel
 {
-    bool Running = true;
-    bool IsDrawing = false;
+    public bool Running = true;
+    public bool IsDrawing = false;
     public ChartViewModel()
     {
     }
