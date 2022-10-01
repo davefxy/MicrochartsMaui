@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using SkiaSharp;
+using System.Reflection.Emit;
 
 namespace Microcharts
 {
@@ -179,7 +180,9 @@ namespace Microcharts
                 float valRange = maxValue - minValue;
 
                 var firstSerie = Series.FirstOrDefault();
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
                 var labels = firstSerie.Entries.Select(x => x.Label).ToArray();
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
                 int nbItems = labels.Length;
 
                 var groupedEntries = entries.GroupBy(x => x.Label);
@@ -213,7 +216,6 @@ namespace Microcharts
                     for (int i = 0; i < labels.Length; i++)
                     {
                         var itemX = Margin + (itemSize.Width / 2) + (i * (itemSize.Width + Margin)) + yAxisXShift;
-
                         string? label = labels[i];
                         if (!string.IsNullOrEmpty(label))
                         {

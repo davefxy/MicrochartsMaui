@@ -26,6 +26,12 @@ namespace Microcharts
         #region Properties
 
         /// <summary>
+        /// Gets or sets the X offset for entry value.
+        /// </summary>
+        /// <value>The value.</value>
+        public float? LabelX { get; set; }
+
+        /// <summary>
         /// Gets the value.
         /// </summary>
         /// <value>The value.</value>

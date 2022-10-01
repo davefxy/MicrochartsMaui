@@ -283,7 +283,6 @@ namespace Microcharts
         #endregion
 
         #region Methods
-
         /// <summary>
         /// Draw the  graph onto the specified canvas.
         /// </summary>

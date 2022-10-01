@@ -51,11 +51,25 @@ namespace Microcharts
         #endregion
 
         #region Methods
+        //public float[] CalculateLabelOffsets(int width, int serieIndex)
+        //{
+        //    var firstSerie = Series.ElementAt(serieIndex);
+        //    var labels = firstSerie.Entries.Select(x => x.Label).ToArray();
+        //    int nbItems = labels.Length;
+
+        //    var Xoffset = (width - ((nbItems + 1) * Margin)) / nbItems;
+        //    float[] itemOffsets = new float[labels.Length];
+        //    for (int i = 0; i < labels.Length; i++)
+        //    {
+        //        itemOffsets[i] = Margin + (Xoffset / 2) + (i * (Xoffset + Margin));// + yAxisXShift;
+        //    }
+        //    return itemOffsets;
+        //}
 
         /// <inheritdoc/>
         protected override float CalculateHeaderHeight(Dictionary<ChartEntry, SKRect> valueLabelSizes)
         {
-            if(ValueLabelOption == ValueLabelOption.None || ValueLabelOption == ValueLabelOption.OverElement)
+            if (ValueLabelOption == ValueLabelOption.None || ValueLabelOption == ValueLabelOption.OverElement)
                 return Margin;
 
             return base.CalculateHeaderHeight(valueLabelSizes);
