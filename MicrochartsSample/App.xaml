@@ -5,34 +5,10 @@
              x:Class="MicrochartsSample.App">
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="Primary">#FFC107</Color>
-            <Color x:Key="PrimaryDark">#FFA000</Color>
-            <Color x:Key="Accent">#00BCD4</Color>
-
-            <Color x:Key="LightBackground">#FAF9F8</Color>
-            <Color x:Key="DarkBackground">Black</Color>
-
-            <Color x:Key="CardBackground">White</Color>
-            <Color x:Key="CardBackgroundDark">#1C1C1E</Color>
-
-            <Color x:Key="LabelText">#1F1F1F</Color>
-            <Color x:Key="LabelTextDark">White</Color>
-
-            <Color x:Key="PrimaryColor">#512bdf</Color>
-            <Color x:Key="SecondaryColor">White</Color>
-
-            <Style TargetType="Label">
-                <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
-                <Setter Property="FontFamily" Value="OpenSansRegular" />
-            </Style>
-
-            <Style TargetType="Button">
-                <Setter Property="TextColor" Value="{DynamicResource SecondaryColor}" />
-                <Setter Property="FontFamily" Value="OpenSansRegular" />
-                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
-                <Setter Property="Padding" Value="14,10" />
-            </Style>
-
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

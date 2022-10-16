@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-
-namespace MicrochartsSample.ViewModels;
+﻿namespace MicrochartsSample.ViewModels;
 
 public partial class BaseViewModel : ObservableObject
 {
