@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using SkiaSharp;
-
+#nullable enable
 namespace Microcharts
 {
     /// <summary>

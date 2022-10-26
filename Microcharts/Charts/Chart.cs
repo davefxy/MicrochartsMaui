@@ -1,5 +1,6 @@
 // Copyright (c) Aloïs DENIEL. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
+#nullable enable
 
 using System.ComponentModel;
 using System.Diagnostics;
