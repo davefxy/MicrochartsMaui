@@ -56,14 +56,14 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
-		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.3" />
-		<PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.3" />
-		<PackageReference Include="SkiaSharp.Views.Maui.Core" Version="2.88.3" />
-	  <PackageReference Include="System.Runtime.InteropServices.NFloat.Internal" Version="6.0.1" />
+		<!--<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.3" />
+		<PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.3" />-->
+		<PackageReference Include="SkiaSharp.Extended.UI.Maui" Version="2.0.0-preview.61" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Microcharts\Microcharts.csproj" />
+		<!--<PackageReference Include="Microcharts" Version="1.0.3" />-->
+		<ProjectReference Include="..\Microcharts\Microcharts.csproj" />
 	</ItemGroup>
 	
 	<ItemGroup>
