@@ -103,85 +103,83 @@ namespace Microcharts
 
                 DrawBorder(canvas, center, radius);
 
-                using (var clip = new SKPath())
+                using var clip = new SKPath();
+                clip.AddCircle(center.X, center.Y, radius);
+
+
+                for (int i = 0; i < total; i++)
                 {
-                    clip.AddCircle(center.X, center.Y, radius);
+                    var angle = startAngle + (rangeAngle * i);
+                    var entry = Entries.ElementAt(i);
 
-                    
-                    for (int i = 0; i < total; i++)
+
+                    int nextIndex = (i + 1) % total;
+                    var nextAngle = startAngle + (rangeAngle * nextIndex);
+                    var nextEntry = Entries.ElementAt(nextIndex);
+                    while (!nextEntry.Value.HasValue)
                     {
-                        var angle = startAngle + (rangeAngle * i);
-                        var entry = Entries.ElementAt(i);
-
-
-                        int nextIndex = (i + 1) % total;
-                        var nextAngle = startAngle + (rangeAngle * nextIndex);
-                        var nextEntry = Entries.ElementAt(nextIndex);
-                        while( !nextEntry.Value.HasValue)
-                        {
-                            nextIndex = (nextIndex + 1) % total;
-                            nextAngle = startAngle + (rangeAngle * nextIndex);
-                            nextEntry = Entries.ElementAt(nextIndex);
-                        }
-
-                        canvas.Save();
-                        if (entry.Value.HasValue)
-                        {
-                            var point = GetPoint(entry.Value.Value * AnimationProgress, center, angle, radius);
-                            var nextPoint = GetPoint(nextEntry.Value.Value * AnimationProgress, center, nextAngle, radius);
-
-                            canvas.ClipPath(clip);
-
-                            // Border center bars
-                            using (var paint = new SKPaint()
-                            {
-                                Style = SKPaintStyle.Stroke,
-                                StrokeWidth = BorderLineSize,
-                                Color = BorderLineColor,
-                                IsAntialias = true,
-                            })
-                            {
-                                var borderPoint = GetPoint(MaxValue, center, angle, radius);
-                                canvas.DrawLine(point.X, point.Y, borderPoint.X, borderPoint.Y, paint);
-                            }
-
-                            // Values points and lines
-                            using (var paint = new SKPaint()
-                            {
-                                Style = SKPaintStyle.Stroke,
-                                StrokeWidth = BorderLineSize,
-                                Color = entry.Color.WithAlpha((byte)(entry.Color.Alpha * 0.75f * AnimationProgress)),
-                                PathEffect = SKPathEffect.CreateDash(new[] { BorderLineSize, BorderLineSize * 2 }, 0),
-                                IsAntialias = true,
-                            })
-                            {
-                                var amount = Math.Abs(entry.Value.Value - AbsoluteMinimum) / ValueRange;
-                                canvas.DrawCircle(center.X, center.Y, radius * amount, paint);
-                            }
-
-                            canvas.DrawGradientLine(center, entry.Color.WithAlpha(0), point, entry.Color.WithAlpha((byte)(entry.Color.Alpha * 0.75f)), LineSize);
-                            canvas.DrawGradientLine(point, entry.Color, nextPoint, nextEntry.Color, LineSize);
-                            canvas.DrawPoint(point, entry.Color, PointSize, PointMode);
-                        }
-                        canvas.Restore();
-
-                        // Labels
-                        var labelPoint = new SKPoint(0, radius + LabelTextSize + (PointSize / 2));
-                        var rotation = SKMatrix.CreateRotation(angle);
-                        labelPoint = center + rotation.MapPoint(labelPoint);
-                        var alignment = SKTextAlign.Left;
-
-                        if ((Math.Abs(angle - (startAngle + Math.PI)) < Epsilon) || (Math.Abs(angle - Math.PI) < Epsilon))
-                        {
-                            alignment = SKTextAlign.Center;
-                        }
-                        else if (angle > (float)(startAngle + Math.PI))
-                        {
-                            alignment = SKTextAlign.Right;
-                        }
-
-                        canvas.DrawCaptionLabels(entry.Label, entry.TextColor, entry.ValueLabel, entry.Color.WithAlpha((byte)(255 * AnimationProgress)), LabelTextSize, labelPoint, alignment, base.Typeface, out var _);
+                        nextIndex = (nextIndex + 1) % total;
+                        nextAngle = startAngle + (rangeAngle * nextIndex);
+                        nextEntry = Entries.ElementAt(nextIndex);
                     }
+
+                    canvas.Save();
+                    if (entry.Value.HasValue)
+                    {
+                        var point = GetPoint(entry.Value.Value * AnimationProgress, center, angle, radius);
+                        var nextPoint = GetPoint(nextEntry.Value.Value * AnimationProgress, center, nextAngle, radius);
+
+                        canvas.ClipPath(clip);
+
+                        // Border center bars
+                        using (var paint = new SKPaint()
+                        {
+                            Style = SKPaintStyle.Stroke,
+                            StrokeWidth = BorderLineSize,
+                            Color = BorderLineColor,
+                            IsAntialias = true,
+                        })
+                        {
+                            var borderPoint = GetPoint(MaxValue, center, angle, radius);
+                            canvas.DrawLine(point.X, point.Y, borderPoint.X, borderPoint.Y, paint);
+                        }
+
+                        // Values points and lines
+                        using (var paint = new SKPaint()
+                        {
+                            Style = SKPaintStyle.Stroke,
+                            StrokeWidth = BorderLineSize,
+                            Color = entry.Color.WithAlpha((byte)(entry.Color.Alpha * 0.75f * AnimationProgress)),
+                            PathEffect = SKPathEffect.CreateDash(new[] { BorderLineSize, BorderLineSize * 2 }, 0),
+                            IsAntialias = true,
+                        })
+                        {
+                            var amount = Math.Abs(entry.Value.Value - AbsoluteMinimum) / ValueRange;
+                            canvas.DrawCircle(center.X, center.Y, radius * amount, paint);
+                        }
+
+                        canvas.DrawGradientLine(center, entry.Color.WithAlpha(0), point, entry.Color.WithAlpha((byte)(entry.Color.Alpha * 0.75f)), LineSize);
+                        canvas.DrawGradientLine(point, entry.Color, nextPoint, nextEntry.Color, LineSize);
+                        canvas.DrawPoint(point, entry.Color, PointSize, PointMode);
+                    }
+                    canvas.Restore();
+
+                    // Labels
+                    var labelPoint = new SKPoint(0, radius + LabelTextSize + (PointSize / 2));
+                    var rotation = SKMatrix.CreateRotation(angle);
+                    labelPoint = center + rotation.MapPoint(labelPoint);
+                    var alignment = SKTextAlign.Left;
+
+                    if ((Math.Abs(angle - (startAngle + Math.PI)) < Epsilon) || (Math.Abs(angle - Math.PI) < Epsilon))
+                    {
+                        alignment = SKTextAlign.Center;
+                    }
+                    else if (angle > (float)(startAngle + Math.PI))
+                    {
+                        alignment = SKTextAlign.Right;
+                    }
+
+                    canvas.DrawCaptionLabels(entry.Label, entry.TextColor, entry.ValueLabel, entry.Color.WithAlpha((byte)(255 * AnimationProgress)), LabelTextSize, labelPoint, alignment, base.Typeface, out var _);
                 }
             }
         }
@@ -204,16 +202,14 @@ namespace Microcharts
 
         private void DrawBorder(SKCanvas canvas, SKPoint center, float radius)
         {
-            using (var paint = new SKPaint()
+            using var paint = new SKPaint()
             {
                 Style = SKPaintStyle.Stroke,
                 StrokeWidth = BorderLineSize,
                 Color = BorderLineColor,
                 IsAntialias = true,
-            })
-            {
-                canvas.DrawCircle(center.X, center.Y, radius, paint);
-            }
+            };
+            canvas.DrawCircle(center.X, center.Y, radius, paint);
         }
 
         #endregion

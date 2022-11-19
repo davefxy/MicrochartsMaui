@@ -180,9 +180,7 @@ namespace Microcharts
                 float valRange = maxValue - minValue;
 
                 var firstSerie = Series.FirstOrDefault();
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
                 var labels = firstSerie.Entries.Select(x => x.Label).ToArray();
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
                 int nbItems = labels.Length;
 
                 var groupedEntries = entries.GroupBy(x => x.Label);

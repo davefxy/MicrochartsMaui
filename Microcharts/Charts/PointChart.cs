@@ -79,17 +79,15 @@ namespace Microcharts
             {
                 var y = Math.Min(origin, barY);
 
-                using (var shader = SKShader.CreateLinearGradient(new SKPoint(0, origin), new SKPoint(0, barY), new[] { color.WithAlpha(PointAreaAlpha), color.WithAlpha((byte)(PointAreaAlpha / 3)) }, null, SKShaderTileMode.Clamp))
-                using (var paint = new SKPaint
+                using var shader = SKShader.CreateLinearGradient(new SKPoint(0, origin), new SKPoint(0, barY), new[] { color.WithAlpha(PointAreaAlpha), color.WithAlpha((byte)(PointAreaAlpha / 3)) }, null, SKShaderTileMode.Clamp);
+                using var paint = new SKPaint
                 {
                     Style = SKPaintStyle.Fill,
                     Color = color.WithAlpha(PointAreaAlpha),
-                })
-                {
-                    paint.Shader = shader;
-                    var height = Math.Max(2, Math.Abs(origin - barY));
-                    canvas.DrawRect(SKRect.Create(barX - (itemSize.Width / 2) + (barSize.Width / 2) - (PointSize / 2), y, PointSize, height), paint);
-                }
+                };
+                paint.Shader = shader;
+                var height = Math.Max(2, Math.Abs(origin - barY));
+                canvas.DrawRect(SKRect.Create(barX - (itemSize.Width / 2) + (barSize.Width / 2) - (PointSize / 2), y, PointSize, height), paint);
             }
         }
 

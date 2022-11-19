@@ -56,13 +56,13 @@ namespace Microcharts
                     {
                         if (bounds.Width > itemSize.Width)
                         {
-                            text = text.Substring(0, Math.Min(3, text.Length));
+                            text = text[..Math.Min(3, text.Length)];
                             paint.MeasureText(text, ref bounds);
                         }
 
                         if (bounds.Width > itemSize.Width)
                         {
-                            text = text.Substring(0, Math.Min(1, text.Length));
+                            text = text[..Math.Min(1, text.Length)];
                             paint.MeasureText(text, ref bounds);
                         }
 
@@ -138,8 +138,8 @@ namespace Microcharts
             var pt = yAxisTextPaint.Clone();
             pt.TextAlign = yAxisPosition == Position.Left ? SKTextAlign.Right : SKTextAlign.Left;
 
-            foreach (var @int in intervals)
-                canvas.DrawTextCenteredVertically(@int.Label, pt, @int.Point.X, @int.Point.Y);
+            foreach (var (Label, Point) in intervals)
+                canvas.DrawTextCenteredVertically(Label, pt, Point.X, Point.Y);
         }
 
         /// <summary>

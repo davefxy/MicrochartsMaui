@@ -48,7 +48,7 @@ namespace Microcharts
         /// Gets a value indicating whether this <see cref="T:Microcharts.InvalidateWeakEventHandler`1"/> is alive.
         /// </summary>
         /// <value><c>true</c> if is alive; otherwise, <c>false</c>.</value>
-        public bool IsAlive => this.sourceReference.TryGetTarget(out Chart s) && this.targetReference.TryGetTarget(out TTarget t);
+        public bool IsAlive => sourceReference.TryGetTarget(out _) && targetReference.TryGetTarget(out _);
 
         #endregion
 
@@ -91,7 +91,10 @@ namespace Microcharts
         /// <see cref="Dispose"/>, you must release all references to the
         /// <see cref="T:Microcharts.InvalidatedWeakEventHandler`1"/> so the garbage collector can reclaim the memory
         /// that the <see cref="T:Microcharts.InvalidatedWeakEventHandler`1"/> was occupying.</remarks>
-        public void Dispose() => this.Unsubscribe();
+        public void Dispose()
+        {
+            Unsubscribe();
+        }
 
         private void OnEvent(object sender, EventArgs args)
         {

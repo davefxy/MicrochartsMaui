@@ -117,17 +117,15 @@ namespace Microcharts
         /// <param name="size">The stroke size.</param>
         public static void DrawGradientLine(this SKCanvas canvas, SKPoint startPoint, SKColor startColor, SKPoint endPoint, SKColor endColor, float size)
         {
-            using (var shader = SKShader.CreateLinearGradient(startPoint, endPoint, new[] { startColor, endColor }, null, SKShaderTileMode.Clamp))
+            using var shader = SKShader.CreateLinearGradient(startPoint, endPoint, new[] { startColor, endColor }, null, SKShaderTileMode.Clamp);
+            using var paint = new SKPaint
             {
-                using var paint = new SKPaint
-                {
-                    Style = SKPaintStyle.Stroke,
-                    StrokeWidth = size,
-                    Shader = shader,
-                    IsAntialias = true,
-                };
-                canvas.DrawLine(startPoint.X, startPoint.Y, endPoint.X, endPoint.Y, paint);
-            }
+                Style = SKPaintStyle.Stroke,
+                StrokeWidth = size,
+                Shader = shader,
+                IsAntialias = true,
+            };
+            canvas.DrawLine(startPoint.X, startPoint.Y, endPoint.X, endPoint.Y, paint);
         }
 
         /// <summary>

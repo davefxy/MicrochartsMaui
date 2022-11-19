@@ -189,59 +189,57 @@ namespace Microcharts
                 foreach (var s in Series)
                 {
                     var points = pointsPerSerie[s].ToArray();
-                    using (var paint = new SKPaint
+                    using var paint = new SKPaint
                     {
                         Style = SKPaintStyle.Stroke,
                         Color = s.Color ?? SKColors.White,
                         StrokeWidth = LineSize,
                         IsAntialias = true,
-                    })
+                    };
+                    if (s.Color == null)
+                        using (var shader = CreateXGradient(points, s.Entries, s.Color))
+                            paint.Shader = shader;
+
+                    var path = new SKPath();
+                    //path.MoveTo(points.First());
+
+                    var isFirst = true;
+                    var entries = s.Entries;
+                    var lineMode = LineMode;
+                    var last = (lineMode == LineMode.Spline) ? points.Length - 1 : points.Length;
+                    for (int i = 0; i < last; i++)
                     {
-                        if (s.Color == null)
-                            using (var shader = CreateXGradient(points, s.Entries, s.Color))
-                                paint.Shader = shader;
-
-                        var path = new SKPath();
-                        //path.MoveTo(points.First());
-
-                        var isFirst = true;
-                        var entries = s.Entries;
-                        var lineMode = LineMode;
-                        var last = (lineMode == LineMode.Spline) ? points.Length - 1 : points.Length;
-                        for (int i = 0; i < last; i++)
+                        if (!entries.ElementAt(i).Value.HasValue) continue;
+                        if (isFirst)
                         {
-                            if (!entries.ElementAt(i).Value.HasValue) continue;
-                            if (isFirst)
-                            {
-                                path.MoveTo(points[i]);
-                                isFirst = false;
-                            }
-
-
-                            if (lineMode == LineMode.Spline)
-                            {
-                                int next = i + 1;
-                                while (next < last && !entries.ElementAt(next).Value.HasValue)
-                                {
-                                    next++;
-                                }
-
-                                if (next == last && !entries.ElementAt(next).Value.HasValue)
-                                {
-                                    break;
-                                }
-
-                                var cubicInfo = CalculateCubicInfo(points, i, next, itemSize);
-                                path.CubicTo(cubicInfo.control, cubicInfo.nextControl, cubicInfo.nextPoint);
-                            }
-                            else if (lineMode == LineMode.Straight)
-                            {
-                                path.LineTo(points[i]);
-                            }
+                            path.MoveTo(points[i]);
+                            isFirst = false;
                         }
 
-                        canvas.DrawPath(path, paint);
+
+                        if (lineMode == LineMode.Spline)
+                        {
+                            int next = i + 1;
+                            while (next < last && !entries.ElementAt(next).Value.HasValue)
+                            {
+                                next++;
+                            }
+
+                            if (next == last && !entries.ElementAt(next).Value.HasValue)
+                            {
+                                break;
+                            }
+
+                            var cubicInfo = CalculateCubicInfo(points, i, next, itemSize);
+                            path.CubicTo(cubicInfo.control, cubicInfo.nextControl, cubicInfo.nextPoint);
+                        }
+                        else if (lineMode == LineMode.Straight)
+                        {
+                            path.LineTo(points[i]);
+                        }
                     }
+
+                    canvas.DrawPath(path, paint);
                 }
             }
         }
@@ -250,66 +248,62 @@ namespace Microcharts
         {
             if (LineAreaAlpha > 0 && points.Length > 1)
             {
-                using (var paint = new SKPaint
+                using var paint = new SKPaint
                 {
                     Style = SKPaintStyle.Fill,
                     Color = SKColors.White,
                     IsAntialias = true,
-                })
+                };
+                using var shaderX = CreateXGradient(points, serie.Entries, serie.Color, (byte)(LineAreaAlpha * AnimationProgress));
+                using var shaderY = CreateYGradient(points, (byte)(LineAreaAlpha * AnimationProgress));
+                paint.Shader = EnableYFadeOutGradient ? SKShader.CreateCompose(shaderY, shaderX, SKBlendMode.SrcOut) : shaderX;
+
+                var path = new SKPath();
+
+                var isFirst = true;
+                var entries = serie.Entries;
+                var lineMode = LineMode;
+                var last = (lineMode == LineMode.Spline) ? points.Length - 1 : points.Length;
+                SKPoint lastPoint = points.First();
+                for (int i = 0; i < last; i++)
                 {
-                    using (var shaderX = CreateXGradient(points, serie.Entries, serie.Color, (byte)(LineAreaAlpha * AnimationProgress)))
-                    using (var shaderY = CreateYGradient(points, (byte)(LineAreaAlpha * AnimationProgress)))
+                    if (!entries.ElementAt(i).Value.HasValue) continue;
+
+                    if (isFirst)
                     {
-                        paint.Shader = EnableYFadeOutGradient ? SKShader.CreateCompose(shaderY, shaderX, SKBlendMode.SrcOut) : shaderX;
+                        path.MoveTo(points[i].X, origin);
+                        path.LineTo(points[i]);
+                        isFirst = false;
+                    }
 
-                        var path = new SKPath();
-
-                        var isFirst = true;
-                        var entries = serie.Entries;
-                        var lineMode = LineMode;
-                        var last = (lineMode == LineMode.Spline) ? points.Length - 1 : points.Length;
-                        SKPoint lastPoint = points.First();
-                        for (int i = 0; i < last; i++)
+                    if (lineMode == LineMode.Spline)
+                    {
+                        int next = i + 1;
+                        while (next < last && !entries.ElementAt(next).Value.HasValue)
                         {
-                            if (!entries.ElementAt(i).Value.HasValue) continue;
-
-                            if( isFirst )
-                            {
-                                path.MoveTo(points[i].X, origin);
-                                path.LineTo(points[i]);
-                                isFirst = false;
-                            }
-
-                            if (lineMode == LineMode.Spline)
-                            {
-                                int next = i + 1;
-                                while (next < last && !entries.ElementAt(next).Value.HasValue)
-                                {
-                                    next++;
-                                }
-
-                                if (next == last && !entries.ElementAt(next).Value.HasValue)
-                                {
-                                    lastPoint = points[i];
-                                    break;
-                                }
-
-                                var cubicInfo = CalculateCubicInfo(points, i, next, itemSize);
-                                path.CubicTo(cubicInfo.control, cubicInfo.nextControl, cubicInfo.nextPoint);
-                                lastPoint = cubicInfo.nextPoint;
-                            }
-                            else if (lineMode == LineMode.Straight)
-                            {
-                                path.LineTo(points[i]);
-                                lastPoint = points[i];
-                            }
+                            next++;
                         }
 
-                        path.LineTo(lastPoint.X, origin);
-                        path.Close();
-                        canvas.DrawPath(path, paint);
+                        if (next == last && !entries.ElementAt(next).Value.HasValue)
+                        {
+                            lastPoint = points[i];
+                            break;
+                        }
+
+                        var cubicInfo = CalculateCubicInfo(points, i, next, itemSize);
+                        path.CubicTo(cubicInfo.control, cubicInfo.nextControl, cubicInfo.nextPoint);
+                        lastPoint = cubicInfo.nextPoint;
+                    }
+                    else if (lineMode == LineMode.Straight)
+                    {
+                        path.LineTo(points[i]);
+                        lastPoint = points[i];
                     }
                 }
+
+                path.LineTo(lastPoint.X, origin);
+                path.Close();
+                canvas.DrawPath(path, paint);
             }
         }
 

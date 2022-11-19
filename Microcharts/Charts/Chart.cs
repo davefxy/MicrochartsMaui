@@ -535,10 +535,7 @@ namespace Microcharts
         {
             try
             {
-                if (animationCancellation != null)
-                {
-                    animationCancellation.Cancel();
-                }
+                animationCancellation?.Cancel();
 
                 var cancellation = new CancellationTokenSource();
                 animationCancellation = cancellation;
