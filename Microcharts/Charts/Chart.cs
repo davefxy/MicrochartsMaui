@@ -19,7 +19,7 @@ namespace Microcharts
         /// <summary>
         /// IEnumerable of <seealso cref="T:Microcharts.ChartEntry" /> corresponding of Entries of the chart.
         /// </summary>
-        protected IEnumerable<ChartEntry> entries;
+        protected IEnumerable<ChartEntry>? entries;
 
         private float animationProgress, margin = 20, labelTextSize = 16;
 
@@ -27,7 +27,7 @@ namespace Microcharts
 
         private SKColor labelColor = SKColors.Gray;
 
-        private SKTypeface typeface;
+        private SKTypeface? typeface;
 
         private float? internalMinValue, internalMaxValue;
 
@@ -37,7 +37,7 @@ namespace Microcharts
 
         private Task? invalidationPlanification;
 
-        private CancellationTokenSource animationCancellation;
+        private CancellationTokenSource? animationCancellation;
 
         #endregion
 
@@ -58,12 +58,12 @@ namespace Microcharts
         /// <summary>
         /// Occurs when property changed.
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         /// Occurs when the chart is invalidated.
         /// </summary>
-        public event EventHandler Invalidated;
+        public event EventHandler? Invalidated;
 
         #endregion
 
@@ -191,7 +191,7 @@ namespace Microcharts
         {
             get
             {
-                if (!entries.Any())
+                if (entries == null || !entries.Any())
                 {
                     return 0;
                 }
@@ -216,7 +216,7 @@ namespace Microcharts
         {
             get
             {
-                if (!entries.Any())
+                if (entries == null || !entries.Any())
                 {
                     return 0;
                 }
@@ -608,7 +608,8 @@ namespace Microcharts
             if(!EqualityComparer<T>.Default.Equals(field, value))
             {
                 field = value;
-                RaisePropertyChanged(property);
+                if (property != null)
+                    RaisePropertyChanged(property);
                 return true;
             }
 

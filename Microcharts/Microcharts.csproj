@@ -9,7 +9,7 @@
 		<LangVersion>latest</LangVersion>
 	  <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 	  <ApplicationVersion>1</ApplicationVersion>
-
+	  <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
 
   <ItemGroup>
