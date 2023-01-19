@@ -13,8 +13,9 @@ namespace Microcharts
         /// <summary>
         /// internal series
         /// </summary>
+#nullable enable
         protected IEnumerable<ChartSerie>? series;
-
+#nullable disable
         /// <summary>
         /// Gets or sets the Series
         /// </summary>

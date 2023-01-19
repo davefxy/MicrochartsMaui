@@ -214,7 +214,7 @@ namespace Microcharts
                     for (int i = 0; i < labels.Length; i++)
                     {
                         var itemX = Margin + (itemSize.Width / 2) + (i * (itemSize.Width + Margin)) + yAxisXShift;
-                        string? label = labels[i];
+                        string label = labels[i];
                         if (!string.IsNullOrEmpty(label))
                         {
                             SKRect labelSize = labelSizes[i];
@@ -276,7 +276,9 @@ namespace Microcharts
         /// <param name="itemX"></param>
         protected virtual void DrawValueLabel(SKCanvas canvas, Dictionary<ChartEntry, SKRect> valueLabelSizes, float headerWithLegendHeight, SKSize itemSize, SKSize barSize, ChartEntry? entry, float barX, float barY, float itemX, float origin)
         {
+#nullable enable
             string? label = entry?.ValueLabel;
+#nullable disable
             if (!string.IsNullOrEmpty(label))
                 DrawHelper.DrawLabel(canvas, ValueLabelOrientation, YPositionBehavior.UpToElementHeight, barSize, new SKPoint(barX - (itemSize.Width / 2) + (barSize.Width / 2), headerWithLegendHeight - Margin), entry.ValueLabelColor.WithAlpha((byte)(255 * AnimationProgress)), valueLabelSizes[entry], label, ValueLabelTextSize, Typeface);
         }

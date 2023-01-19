@@ -156,7 +156,7 @@ namespace Microcharts
         /// <summary>
         /// Typeface for labels
         /// </summary>
-        public SKTypeface Typeface
+        public SKTypeface? Typeface
         {
             get => typeface;
             set => Set(ref typeface, value);
@@ -198,10 +198,14 @@ namespace Microcharts
 
                 if (InternalMinValue == null)
                 {
+#pragma warning disable CS8629
                     return Math.Min(0, entries.Where( x=>x.Value.HasValue).Min(x => x.Value.Value));
+#pragma warning restore CS8629
                 }
 
+#pragma warning disable CS8629
                 return Math.Min(InternalMinValue.Value, entries.Where(x => x.Value.HasValue).Min(x => x.Value.Value));
+#pragma warning restore CS8629
             }
 
             set => InternalMinValue = value;
@@ -223,10 +227,14 @@ namespace Microcharts
 
                 if (InternalMaxValue == null)
                 {
+#pragma warning disable CS8629
                     return Math.Max(0, entries.Where( x=>x.Value.HasValue ).Max(x => x.Value.Value));
+#pragma warning restore CS8629
                 }
 
+#pragma warning disable CS8629
                 return Math.Max(InternalMaxValue.Value, entries.Where(x => x.Value.HasValue).Max(x => x.Value.Value));
+#pragma warning restore CS8629
             }
 
             set => InternalMaxValue = value;

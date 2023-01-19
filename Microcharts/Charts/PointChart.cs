@@ -49,7 +49,9 @@ namespace Microcharts
         /// <inheritdoc />
         protected override void DrawValueLabel(SKCanvas canvas, Dictionary<ChartEntry, SKRect> valueLabelSizes, float headerWithLegendHeight, SKSize itemSize, SKSize barSize, ChartEntry entry, float barX, float barY, float itemX, float origin)
         {
+#nullable enable
             string? label = entry?.ValueLabel;
+#nullable disable
             if (string.IsNullOrEmpty(label))
                 return;
 
