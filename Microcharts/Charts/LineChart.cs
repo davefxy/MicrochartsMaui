@@ -72,10 +72,10 @@ namespace Microcharts
             base.DrawContent(canvas, width, height);
         }
 
-        protected override void DrawNullPoint(ChartSerie serie, SKCanvas canvas) {
+        protected override void DrawNullPoint(ChartSerie series, SKCanvas canvas) {
             //Some of the drawing algorithms index into pointsPerSerie
             var point = new SKPoint(float.MinValue, float.MinValue);
-            pointsPerSerie[serie].Add(point);
+            pointsPerSerie[series].Add(point);
         }
 
         /// <inheritdoc/>
@@ -132,7 +132,7 @@ namespace Microcharts
                         string label = entry.ValueLabel;
                         if (!string.IsNullOrEmpty(label))
                         {
-                          var drawedPoint = pps.Value.ElementAt(i);
+                          var drawnPoint = pps.Value.ElementAt(i);
                           SKPoint point;
                           YPositionBehavior yPositionBehavior = YPositionBehavior.None;
 
@@ -144,7 +144,7 @@ namespace Microcharts
                           var valueLabelSize = valueLabelSizes[entry];
                           if (valueLabelOption == ValueLabelOption.TopOfElement)
                           {
-                              point = new SKPoint(drawedPoint.X, drawedPoint.Y - (PointSize / 2) - (Margin / 2));
+                              point = new SKPoint(drawnPoint.X, drawnPoint.Y - (PointSize / 2) - (Margin / 2));
                               if (ValueLabelOrientation == Orientation.Vertical)
                                   yPositionBehavior = YPositionBehavior.UpToElementHeight;
                           }
@@ -155,7 +155,7 @@ namespace Microcharts
                               else
                                   yPositionBehavior = YPositionBehavior.DownToElementMiddle;
 
-                              point = new SKPoint(drawedPoint.X, drawedPoint.Y);
+                              point = new SKPoint(drawnPoint.X, drawnPoint.Y);
 
                           }
 
@@ -231,7 +231,7 @@ namespace Microcharts
             }
         }
 
-        private void DrawLineArea(SKCanvas canvas, ChartSerie serie, SKPoint[] points, SKSize itemSize, float origin)
+        private void DrawLineArea(SKCanvas canvas, ChartSerie series, SKPoint[] points, SKSize itemSize, float origin)
         {
             if (LineAreaAlpha > 0 && points.Length > 1)
             {
@@ -241,14 +241,14 @@ namespace Microcharts
                     Color = SKColors.White,
                     IsAntialias = true,
                 };
-                using var shaderX = CreateXGradient(points, serie.Entries, serie.Color, (byte)(LineAreaAlpha * AnimationProgress));
+                using var shaderX = CreateXGradient(points, series.Entries, series.Color, (byte)(LineAreaAlpha * AnimationProgress));
                 using var shaderY = CreateYGradient(points, (byte)(LineAreaAlpha * AnimationProgress));
                 paint.Shader = EnableYFadeOutGradient ? SKShader.CreateCompose(shaderY, shaderX, SKBlendMode.SrcOut) : shaderX;
 
                 var path = new SKPath();
 
                 var isFirst = true;
-                var entries = serie.Entries;
+                var entries = series.Entries;
                 var lineMode = LineMode;
                 var last = (lineMode == LineMode.Spline) ? points.Length - 1 : points.Length;
                 SKPoint lastPoint = points.First();
@@ -302,11 +302,11 @@ namespace Microcharts
         }
 
         /// <inheritdoc/>
-        protected override void DrawBar(ChartSerie serie, SKCanvas canvas, float headerHeight, float itemX, SKSize itemSize, SKSize barSize, float origin, float barX, float barY, SKColor color)
+        protected override void DrawBar(ChartSerie series, SKCanvas canvas, float headerHeight, float itemX, SKSize itemSize, SKSize barSize, float origin, float barX, float barY, SKColor color)
         {
             //Drawing entry point at center of the item (label) part
             var point = new SKPoint(itemX, barY);
-            pointsPerSerie[serie].Add(point);
+            pointsPerSerie[series].Add(point);
         }
 
         /// <inheritdoc/>
@@ -325,7 +325,7 @@ namespace Microcharts
             return (currentControl, nextPoint, nextControl);
         }
 
-        private SKShader CreateXGradient(SKPoint[] points, IEnumerable<ChartEntry> entries, SKColor? serieColor, byte alpha = 255)
+        private SKShader CreateXGradient(SKPoint[] points, IEnumerable<ChartEntry> entries, SKColor? seriesColor, byte alpha = 255)
         {
             var startX = points.First().X;
             var endX = points.Last().X;
@@ -334,7 +334,7 @@ namespace Microcharts
             return SKShader.CreateLinearGradient(
                 new SKPoint(startX, 0),
                 new SKPoint(endX, 0),
-                entries.Select(x => serieColor?.WithAlpha(alpha) ?? x.Color.WithAlpha(alpha)).ToArray(),
+                entries.Select(x => seriesColor?.WithAlpha(alpha) ?? x.Color.WithAlpha(alpha)).ToArray(),
                 null,
                 SKShaderTileMode.Clamp);
         }
