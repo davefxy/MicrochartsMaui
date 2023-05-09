@@ -274,14 +274,14 @@ namespace Microcharts
         /// <param name="barX"></param>
         /// <param name="barY"></param>
         /// <param name="itemX"></param>
+#nullable enable
         protected virtual void DrawValueLabel(SKCanvas canvas, Dictionary<ChartEntry, SKRect> valueLabelSizes, float headerWithLegendHeight, SKSize itemSize, SKSize barSize, ChartEntry? entry, float barX, float barY, float itemX, float origin)
         {
-#nullable enable
             string? label = entry?.ValueLabel;
-#nullable disable
             if (!string.IsNullOrEmpty(label))
                 DrawHelper.DrawLabel(canvas, ValueLabelOrientation, YPositionBehavior.UpToElementHeight, barSize, new SKPoint(barX - (itemSize.Width / 2) + (barSize.Width / 2), headerWithLegendHeight - Margin), entry.ValueLabelColor.WithAlpha((byte)(255 * AnimationProgress)), valueLabelSizes[entry], label, ValueLabelTextSize, Typeface);
         }
+#nullable disable
 
         /// <summary>
         /// Method executed after the DrawContent parts
