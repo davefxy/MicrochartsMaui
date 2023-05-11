@@ -155,6 +155,7 @@ public static class Data
             },
             new LineChart
             {
+                BackgroundColor = SKColors.Transparent,
                 LabelOrientation = Orientation.Horizontal,
                 ValueLabelOrientation = Orientation.Horizontal,
                 LabelTextSize = 42,
@@ -673,6 +674,46 @@ public static class Data
 
         yield return new ExampleChartItem()
         {
+                ExampleName = "Value label top of Bar item, with rounded top corners",
+                ExampleDescription = "Grouped bar chart with default legend and Y Axis and value display on top of bars with rounded top corners.",
+                ExampleChartType = ExampleChartType.Series,
+                Chart = new BarChart
+                {
+                    LabelOrientation = Orientation.Horizontal,
+                    ValueLabelOrientation = Orientation.Horizontal,
+                    LabelTextSize = 42,
+                    ValueLabelTextSize = 18,
+                    ValueLabelOption = ValueLabelOption.TopOfElement,
+                    SerieLabelTextSize = 42,
+                    ShowYAxisLines = true,
+                    ShowYAxisText = true,
+                    YAxisPosition = Position.Left,
+                    CornerRadius = 20,
+                    Series = new List<ChartSerie>()
+                    {
+                        new ChartSerie()
+                        {
+                            Name = "UWP",
+                            Color = SKColor.Parse("#2c3e50"),
+                            Entries = GenerateSeriesEntry(r),
+                        },
+                        new ChartSerie()
+                        {
+                            Name = "Android",
+                            Color = SKColor.Parse("#77d065"),
+                            Entries = GenerateSeriesEntry(r),
+                        },
+                        new ChartSerie()
+                        {
+                            Name = "iOS",
+                            Color = SKColor.Parse("#b455b6"),
+                            Entries = GenerateSeriesEntry(r),
+                        },
+                    }
+                },
+            };
+            yield return new ExampleChartItem()
+            {
             ExampleName = "Value label over Bar item",
             ExampleDescription = "Grouped bar chart with default legend and Y Axis and value display over bars.",
             ExampleChartType = ExampleChartType.Series,
@@ -1382,17 +1423,17 @@ public static class Data
             new DonutChart
             {
                 Entries = entries,
-                LabelTextSize = 60
+                LabelTextSize = 16
             },
             new RadialGaugeChart
             {
                 Entries = entries,
-                LabelTextSize = 60
+                LabelTextSize = 16
             },
             new RadarChart
             {
                 Entries = entries,
-                LabelTextSize = 60
+                    LabelTextSize = 16
             }
         };
     }
@@ -1417,7 +1458,7 @@ public static class Data
         }
         else
         {
-            data = Array.Empty<(string label, int value)>();
+                data = new (string label, int value)[0];
         }
 
         data = data.Take(values).ToArray();
