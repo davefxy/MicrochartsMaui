@@ -1,22 +1,10 @@
+I took the source from original project project at (https://github.com/microcharts-dotnet/Microcharts) because I wanted t create a simple smaller Maui version.
+I made a version explicitly for Net 6.0 and Net 7.0. Keeping its dependency on Skia but pretty much removing all else.
+You can build this version as a nuget and load it locally. Or just include the project with your solution. It should work with any Net 7.0 and Net 6.0 projects.
+I used this as an exercise to learn how to migrate a Xamarin.Forms/ Netstandard 2 version to a Maui version.
+I have accomplised what I intended so I am done with it. Don't intend to maintain this in the foreseeable future.
+There appears to be another group adding new code to the original github site. That would be the version to look toward for future changes.
 # Microcharts
-
-[![Mac Builds](https://github.com/dotnet-ad/Microcharts/actions/workflows/CI-MacOS.yml/badge.svg)](https://github.com/dotnet-ad/Microcharts/actions/workflows/CI-MacOS.yml)
-[![Windows Builds](https://github.com/dotnet-ad/Microcharts/actions/workflows/CI-Windows.yml/badge.svg)](https://github.com/dotnet-ad/Microcharts/actions/workflows/CI-Windows.yml)
-
-[Looking for more contributors](https://github.com/microcharts-dotnet/Microcharts/discussions/274)
-
-## Version 1.0.0 Beta is now available
-
-[![NuGet](https://img.shields.io/nuget/vpre/Microcharts.Forms.svg?label=Microcharts.Forms)](https://www.nuget.org/packages/Microcharts.Forms/)
-
-[![NuGet](https://img.shields.io/nuget/v/Microcharts.Android.svg?label=Microcharts.Android)](https://www.nuget.org/packages/Microcharts.Android/)
-
-[![NuGet](https://img.shields.io/nuget/v/Microcharts.iOS.svg?label=Microcharts.iOS)](https://www.nuget.org/packages/Microcharts.iOS/)
-
-[![NuGet](https://img.shields.io/nuget/v/Microcharts.Mac.svg?label=Microcharts.Mac)](https://www.nuget.org/packages/Microcharts.Mac/)
-
-[![NuGet](https://img.shields.io/nuget/v/Microcharts.Uwp.svg?label=Microcharts.Uwp)](https://www.nuget.org/packages/Microcharts.Uwp/)
-
 
 **Microcharts** is an extremely simple charting library for a wide range of platforms (see *Compatibility* section below), with shared code and rendering for all of them!
 
@@ -34,28 +22,9 @@ If you want to contribute code please file an issue and create a branch off of t
 
 More info on how you can help can be found [here](https://github.com/dotnet-ad/Microcharts/wiki/Contributing).
 
-## Gallery
-
-![animation gallery](assets/animations.gif)
-
-![gallery](assets/Gallery.png)
-
-## Install
-
-Available on NuGet
-
-**NET Standard 2.0, Xamarin.iOS, Xamarin.Android, UWP**
-
-[![NuGet](https://img.shields.io/nuget/v/Microcharts.svg?label=NuGet)](https://www.nuget.org/packages/Microcharts/)
-
-
-**Xamarin.Forms (.NET Standard 2.0)**
-
-[![NuGet](https://img.shields.io/nuget/v/Microcharts.Forms.svg?label=NuGet)](https://www.nuget.org/packages/Microcharts.Forms/)
-
 ## Compatibility
 
-Built in views are provided for **UWP**, **Xamarin.Forms**, **Xamarin.iOS** and **Xamarin.Android**, **Xamarin.macOS**, but any other **.NET Standard 2.0** [SkiaSharp](https://github.com/mono/SkiaSharp) supported platform is also compatible (see one of the included `ChartView` implementations for more details).
+Built in views are provided for **Net 6.0**, **Net 7.0** [SkiaSharp](https://github.com/mono/SkiaSharp) supported platform is also compatible (see one of the included `ChartView` implementations for more details).
 
 ## License
 
