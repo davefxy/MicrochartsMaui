@@ -47,6 +47,18 @@
 	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
 		<ProvisioningType>manual</ProvisioningType>
 	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0|AnyCPU'">
+	  <NoWarn>1701;1702;CS8600;CS8604;CS8622;CS8629;CS8603;CS8620</NoWarn>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0|AnyCPU'">
+	  <NoWarn>1701;1702;CS8600;CS8604;CS8622;CS8629;CS8603;CS8620</NoWarn>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0|AnyCPU'">
+	  <NoWarn>1701;1702;CS8600;CS8604;CS8622;CS8629;CS8603;CS8620</NoWarn>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0|AnyCPU'">
+	  <NoWarn>1701;1702;CS8600;CS8604;CS8622;CS8629;CS8603;CS8620</NoWarn>
+	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="DotNet.ReproducibleBuilds" Version="1.1.1">
 			<PrivateAssets>all</PrivateAssets>
