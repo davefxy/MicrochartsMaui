@@ -5,6 +5,7 @@
              xmlns:local="clr-namespace:MicrochartsSample"
              xmlns:microcharts="clr-namespace:Microcharts;assembly=Microcharts"
              x:Name="Page"
+             Title="Microcharts"
              BackgroundColor="{DynamicResource SecondaryColor}">
 
     <Grid RowDefinitions="Auto, Auto, *, Auto">

@@ -27,10 +27,5 @@ public partial class MainPage : ContentPage
         ChartItem chartItem = frame.BindingContext as ChartItem;
         Navigation.PushAsync(new ChartConfigurationPage(chartItem.Name));
     }
-
-    //private void TapGestureRecognizerLegacyChartsTapped(object sender, EventArgs e)
-    //{
-    //    Navigation.PushAsync(new LegacyPage());
-    //}
 }
 

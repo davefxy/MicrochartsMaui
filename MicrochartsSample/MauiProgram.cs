@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using SkiaSharp.Views.Maui.Controls.Hosting;
+﻿using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace MicrochartsSample;
 
@@ -21,9 +20,6 @@ public static class MauiProgram
 		builder.Services.AddTransient<ChartPage>();
 		builder.Services.AddTransient<ChartViewModel>();
 
-#if DEBUG
-        builder.Logging.AddDebug();
-#endif
 		return builder.Build();
 	}
 }

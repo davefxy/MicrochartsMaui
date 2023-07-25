@@ -22,8 +22,6 @@
                    FontSize="Subtitle"
                    LineBreakMode="WordWrap"
                    Text="{Binding ExampleChartItem.ExampleDescription}" />
-                    <!--Text="{Binding ExampleChartItem.ExampleDescription,
-                                  Source={x:Reference Page}}" />-->
 
         <local:ChartView x:Name="chartView"
                                Chart="{Binding ExampleChartItem.Chart}"

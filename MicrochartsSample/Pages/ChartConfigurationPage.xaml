@@ -13,6 +13,7 @@
         <Label Grid.Row="1"
                Margin="20,0,0,0"
                FontSize="Subtitle"
+               TextColor="Gray"
                Text="Tap on item to see the chart" />
         <CollectionView Grid.Row="2"
                         ItemsSource="{Binding Items,
