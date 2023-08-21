@@ -23,7 +23,7 @@
                    LineBreakMode="WordWrap"
                    Text="{Binding ExampleChartItem.ExampleDescription}" />
 
-        <local:ChartView x:Name="chartView"
+        <microcharts:ChartView x:Name="chartView"
                                Chart="{Binding ExampleChartItem.Chart}"
                                Grid.Row="2"
                                BackgroundColor="White"
